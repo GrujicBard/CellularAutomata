@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace IS_naloga_1
 {
-    class Automata
+    internal class Automata
     {
         BitArray cells, ncells;
         const int MAX_CELLS = 31;
@@ -33,7 +33,6 @@ namespace IS_naloga_1
         //returns chars of row index in sets of 3
         private string getCells(int index)
         {
-            byte b;
             string s;
             int i1 = index - 1,
                 i2 = index,
@@ -52,7 +51,8 @@ namespace IS_naloga_1
         {
             BitArray rule = new BitArray(8);
             string s = Convert.ToString(i, 2); //Converts int to binary string
-            while (s.Length < 8){ //adds missing 0s to front of string if length < 8 
+            while (s.Length < 8)
+            { //adds missing 0s to front of string if length < 8 
                 s = "0" + s;
             }
             rl = s;
@@ -60,7 +60,7 @@ namespace IS_naloga_1
             { //fill BitArray from string
                 rule[st] = s[st] == '1' ? true : false;
             }
-            
+
             return rule;
         }
 
@@ -72,7 +72,7 @@ namespace IS_naloga_1
             cells.Set(MAX_CELLS / 2, true); //generate first row with true in middle
             result[0] = cells;
 
-            for (int gen = 0; gen < height-1; gen++)
+            for (int gen = 0; gen < height - 1; gen++)
             {
                 int i = 0;
                 while (true)
@@ -114,12 +114,12 @@ namespace IS_naloga_1
                 cells = new BitArray(MAX_CELLS);
                 foreach (bool b in ncells)
                 {
-                    cells[i++] = b;                 
+                    cells[i++] = b;
                 }
 
                 result[resultCounter] = cells;
                 resultCounter++;
-            }           
+            }
         }
 
         public string getRule()

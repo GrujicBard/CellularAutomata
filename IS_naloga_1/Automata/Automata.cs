@@ -38,8 +38,8 @@ namespace IS_naloga_1
                 i2 = index,
                 i3 = index + 1;
 
-            if (i1 < 0) i1 = MAX_CELLS - 1; // Left edge
-            if (i3 >= MAX_CELLS) i3 -= MAX_CELLS; // Right edge
+            if (i1 < 0) i1 = MAX_CELLS - 1; // Left edge, go to right side
+            if (i3 >= MAX_CELLS) i3 -= MAX_CELLS; // Right edge, go to left side
 
             s = (cells.Get(i1) ? "1" : "0") + (cells.Get(i2) ? "1" : "0") + (cells.Get(i3) ? "1" : "0");
             //Debug.WriteLine(s);

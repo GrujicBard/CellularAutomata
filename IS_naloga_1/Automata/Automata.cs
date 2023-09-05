@@ -5,35 +5,35 @@ namespace IS_naloga_1
 {
     internal class Automata
     {
-        BitArray cells, ncells;
+        BitArray cells, ncells; // First row, second Row
         const int MAX_CELLS = 31;
         const int height = 16;
         BitArray[] result;
         int resultCounter;
-        string rl;
+        string rl; // Display rule
 
-        public BitArray[] run(string rule)
+        public BitArray[] Run(string rule)
         {
             cells = new BitArray(MAX_CELLS);
             ncells = new BitArray(MAX_CELLS);
             result = new BitArray[height];
             resultCounter = 1;
 
-            doRule(int.Parse(rule));
+            DoRule(int.Parse(rule));
 
             return result;
         }
 
-        //returns chars of row index in sets of 3
-        private string getCells(int index)
+        // Returns chars of row index in sets of 3
+        private string GetCells(int index)
         {
             string s;
             int i1 = index - 1,
                 i2 = index,
                 i3 = index + 1;
 
-            if (i1 < 0) i1 = MAX_CELLS - 1;
-            if (i3 >= MAX_CELLS) i3 -= MAX_CELLS;
+            if (i1 < 0) i1 = MAX_CELLS - 1; // Left edge, go to right side
+            if (i3 >= MAX_CELLS) i3 -= MAX_CELLS; // Right edge, go to left side
 
             s = (cells.Get(i1) ? "1" : "0") + (cells.Get(i2) ? "1" : "0") + (cells.Get(i3) ? "1" : "0");
             //Debug.WriteLine(s);
@@ -41,7 +41,7 @@ namespace IS_naloga_1
         }
 
         //Converts integer to string in binary and adds 0s in front while string length < 8
-        public BitArray toBinary(int i)
+        public BitArray ToBinary(int i)
         {
             BitArray rule = new BitArray(8);
             string s = Convert.ToString(i, 2); //Converts int to binary string
@@ -58,25 +58,25 @@ namespace IS_naloga_1
             return rule;
         }
 
-        private void doRule(int rule)
+        private void DoRule(int rule)
         {
-            BitArray rl = toBinary(rule);
+            BitArray rl = ToBinary(rule); // Transform rule input to binary value
             cells.SetAll(false);
             ncells.SetAll(false);
-            cells.Set(MAX_CELLS / 2, true); //generate first row with true in middle
-            result[0] = cells;
+            cells.Set(MAX_CELLS / 2, true); // Generate first row with true in middle
+            result[0] = cells; // First row middle cell is always true, insert first row into result
 
-            for (int gen = 0; gen < height - 1; gen++)
+            for (int gen = 0; gen < height - 1; gen++) // Iterate through rows
             {
                 int i = 0;
                 while (true)
                 {
-                    string cells = getCells(i);
+                    string cells = GetCells(i); // Get cells in string of 3
 
-                    switch (cells)
+                    switch (cells) // Go through rule of old row
                     {
                         case "111":
-                            ncells[i] = rl[0] ? true : false;
+                            ncells[i] = rl[0] ? true : false; // Generate new row by looking at old row
                             break;
                         case "110":
                             ncells[i] = rl[1] ? true : false;
@@ -104,19 +104,14 @@ namespace IS_naloga_1
                     if (i == MAX_CELLS) break;
                 }
 
-                i = 0;
-                cells = new BitArray(MAX_CELLS);
-                foreach (bool b in ncells)
-                {
-                    cells[i++] = b;
-                }
+                cells = ncells.Clone() as BitArray;
 
-                result[resultCounter] = cells;
+                result[resultCounter] = cells; // Fill result row by row
                 resultCounter++;
             }
         }
 
-        public string getRule()
+        public string GetRule()
         {
             return rl;
         }

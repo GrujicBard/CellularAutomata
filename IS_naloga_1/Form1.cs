@@ -46,8 +46,8 @@ namespace IS_naloga_1
         {
             var rule = textBox1.Text;
             BitArray[] result;
-            result = _automata.run(rule);
-            ShowRule(_automata.getRule());
+            result = _automata.Run(rule);
+            ShowRule(_automata.GetRule());
 
             //Debug.WriteLine("result lenght: " + result.Length);
             //Debug.WriteLine("result0 lenght: " + result[0].Length);

@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Diagnostics;
 using System.Reflection;
-using IS_naloga_1.Game_of_Life;
-using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace IS_naloga_1
 {
@@ -218,7 +209,7 @@ namespace IS_naloga_1
         }
 
         // Hack to speed up table loading
-        public static void SetDoubleBuffered(Control c) 
+        public static void SetDoubleBuffered(Control c)
         {
             if (SystemInformation.TerminalServerSession)
                 return;

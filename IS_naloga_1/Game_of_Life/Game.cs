@@ -1,10 +1,4 @@
 ﻿using IS_naloga_1.Game_of_Life;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace IS_naloga_1
 {
